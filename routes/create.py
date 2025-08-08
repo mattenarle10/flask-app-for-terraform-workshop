@@ -3,7 +3,7 @@ from decimal import Decimal
 import uuid
 from datetime import datetime
 import os
-from ..services import table, s3, bucket_name, region
+from services import table, s3, bucket_name, region
 
 bp = Blueprint("create", __name__)
 

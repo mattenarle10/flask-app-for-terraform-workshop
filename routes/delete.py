@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from ..services import table
+from services import table
 
 bp = Blueprint("delete", __name__)
 

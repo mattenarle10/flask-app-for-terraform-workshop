@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from decimal import Decimal
-from ..services import table
+from services import table
 
 bp = Blueprint("update", __name__)
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, render_template
-from ..services import table
+from services import table
 
 bp = Blueprint("get", __name__)
 
