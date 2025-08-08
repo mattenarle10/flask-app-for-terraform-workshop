@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import boto3
 import uuid
 from datetime import datetime
@@ -99,34 +99,13 @@ def get_products():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/', methods=['GET'])
+def home_ui():
+    return render_template('index.html')
+
 @app.route('/form', methods=['GET'])
 def product_form():
-    return '''
-    <html>
-        <head><title>Create Product</title></head>
-        <body>
-            <h1>Create a Product</h1>
-            <form action="/products" method="post" enctype="multipart/form-data">
-                <label>Product Name:</label><br>
-                <input type="text" name="product_name" required><br><br>
-
-                <label>Price:</label><br>
-                <input type="number" step="0.01" name="price" required><br><br>
-
-                <label>Brand Name:</label><br>
-                <input type="text" name="brand_name" required><br><br>
-
-                <label>Quantity Available:</label><br>
-                <input type="number" name="quantity_available" required><br><br>
-
-                <label>Product Image:</label><br>
-                <input type="file" name="image"><br><br>
-
-                <input type="submit" value="Create Product">
-            </form>
-        </body>
-    </html>
-    '''
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
