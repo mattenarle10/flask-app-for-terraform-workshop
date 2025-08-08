@@ -224,13 +224,14 @@
 
     document.getElementById('createForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.currentTarget);
+      const form = e.currentTarget;
+      const fd = new FormData(form);
       try {
         const res = await fetch('/products', { method: 'POST', body: fd });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed');
         showToast('Product created');
-        e.currentTarget.reset();
+        if (form && typeof form.reset === 'function') form.reset();
         await loadProducts();
       } catch (err) {
         showToast(err.message || 'Error creating product', false);
