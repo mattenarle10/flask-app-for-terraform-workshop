@@ -225,6 +225,13 @@
     document.getElementById('createForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.currentTarget;
+      // Client-side max image size: 8 MB
+      const imageInput = form ? form.querySelector('input[name="image"]') : null;
+      const file = imageInput && imageInput.files ? imageInput.files[0] : null;
+      if (file && file.size > 8 * 1024 * 1024) {
+        showToast('Image too large. Max 8MB.', false);
+        return;
+      }
       const fd = new FormData(form);
       try {
         const res = await fetch('/products', { method: 'POST', body: fd });
